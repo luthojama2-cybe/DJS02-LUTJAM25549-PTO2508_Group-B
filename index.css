@@ -1,0 +1,320 @@
+*,
+::before,
+::after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    /*--COLORS--*/
+
+    --white-bg-clr: #fff;
+    --body-clr: #D3D3D3;
+    --img-background-clr: #666;
+
+    /*DESKTOP-TEXT*/
+    --desktop-body-text: 1.2em;
+    --desktop-secondary-text: 1em;
+    
+    /*MOBILE*/
+    --mobile--body-text: .91em; 
+    --mobile-secondary-text: .8em;
+
+}
+
+body{
+    background: var(--body-clr);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* ===HEADER=== */
+.header{
+    display: flex;
+    justify-content: space-between;
+    padding: 2em;
+    background: var(--white-bg-clr);
+}
+
+.logo{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo strong{
+    font-size: var(--desktop-body-text);
+}
+
+.header_icons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+/* ===MAIN CONTENT=== */
+.main_content{
+    display: flex;
+    flex-direction: column;
+    padding: 2em;
+}
+
+/* ==FILTER BOX== */
+.filter_content_box label{
+    font-size: clamp(var(--mobile-secondary-text), 4vw, var(--desktop-body-text));
+}
+
+select{
+    margin-left: .8em;
+    padding: .82em;
+    border: none;
+    border-radius: 10px;
+}
+
+/* ==PODCAST DATA BOX===*/
+.main_podcast_data_container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-top: 2em;
+    gap: 1em;
+}
+
+.main_podcast_data_container .card{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding: 1.2em;
+    width: 100%;
+    background-color: var(--white-bg-clr);
+}
+.main_podcast_data_container .img_cover{
+    width: 100%;
+    aspect-ratio: 1 / 0.8;
+    padding: 1em;
+    border-radius: 10px;
+    background-color: var(--img-background-clr);
+}
+
+.main_podcast_data_container .podcast_data{
+    display: flex;
+    flex-direction: column;
+    gap: .8em;
+}
+
+.main_podcast_data_container .genre_box{
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+}
+
+.main_podcast_data_container .genre_box p{
+    background-color: var(--body-clr);
+    padding: .4em;
+}
+
+.main_podcast_data_container .season_description, .season_update{
+    color: var(--img-background-clr);
+}
+
+/*===PODCAST IMAGE BEFORE MODAL===*/
+.podcast_cover_img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+
+/*===MODAL OVERLAY===*/
+.podcast_modal_overlay{
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0,0,0,.7);
+    padding: 1em;
+    z-index: 1;
+}
+
+
+/*===HIDE MODAL===*/
+.hidden{
+    display: none;
+}
+
+/*===CLOSE BUTTON===*/
+.modal_close_btn{
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    border: none;
+    background: transparent;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--img-background-clr);
+}
+
+
+/*===MODAL BOX===*/
+.podcast_modal{
+    position: relative;
+    width: 100%;
+    max-width: 60%;
+    max-height: 90vh;
+    overflow-y: auto;
+    background-color: var(--white-bg-clr);
+    border-radius: 20px;
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+/*==MODAL CONTENT STYLE==*/
+
+.modal_flex_container{
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+}
+
+.modal_content{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    max-width: 70%;
+}
+
+
+/*====MODAL IMAGE====*/
+
+.modal_img{
+    width: 100%;
+    border-radius: 15px;
+}
+
+
+/*====MODAL CONTENT====*/
+.modal_content{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+}
+
+
+/*===MODAL DESCRIPTION====*/
+.modal_description{
+    line-height: 1.7;
+    color: var(--img-background-clr);
+}
+
+
+/*===MODAL GENRES===*/
+.modal_genres{
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+}
+
+.modal_genre_tag{
+    background-color: var(--body-clr);
+    padding: .5em 1em;
+    border-radius: 10px;
+}
+
+
+/*===SEASON CONTAINER===*/
+.modal_seasons_container{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+
+/*===SEASON LIST===*/
+.modal_seasons_list{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+
+/*===SEASON CARD===*/
+.modal_season_card{
+    padding: 1em;
+    border: 1px solid var(--body-clr);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+}
+
+
+
+/*===MOBILE RESPONSIVE===*/
+
+@media (max-width:378px) {
+
+    /* ==PODCAST DATA BOX */
+.main_podcast_data_container{
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-top: 2em;
+    gap: 1em;
+}    
+
+.filter_content_box{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+  .podcast_modal{
+        padding: 1em;
+    }
+
+    .modal_seasons_list{
+        grid-template-columns: 1fr;
+    }
+        /*===MODAL BOX===*/
+    .podcast_modal{
+        width: 100%;
+        min-width: 100%;
+    }
+
+    .modal_flex_container{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .modal_title{
+        font-size: 1.2rem;
+    }
+
+        /*===MODAL DESCRIPTION====*/
+    .modal_description{
+        min-width: 35ch;
+        line-height: 1.7;
+        color: var(--img-background-clr);
+    }
+
+    /*===IMAGE===*/
+    .modal_img{
+    width: 100%;
+    max-width: 50%;
+    border-radius: 15px;
+}
+
+/*===MODAL GENRES===*/
+.modal_genres{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+}
+
