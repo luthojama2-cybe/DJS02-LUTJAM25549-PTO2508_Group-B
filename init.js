@@ -2,6 +2,8 @@ import { podcasts, genres } from "./js-files/data.js";
 
 import { openModal } from "./js-files/modal.js";
 
+import "./js-files/podcastCard.js"
+
 
 // MAIN CONTAINER
 const podcastContainer = document.querySelector(
@@ -11,77 +13,26 @@ const podcastContainer = document.querySelector(
 
 // RENDER PODCASTS
 function renderPodcasts() {
-
     podcastContainer.innerHTML = "";
 
     podcasts.forEach((podcast) => {
+        const genreTitles = podcast.genres.map((genreId) => {
+            const matchedGenre = genres.find((genre) => genre.id === genreId);
+            return matchedGenre ? matchedGenre.title : "";
+        });
 
-        // CREATE CARD
-        const card = document.createElement("article");
+        const podcastCard = document.createElement("podcast-card");
 
-        card.classList.add("card");
+        podcastCard.data = {
+            ...podcast,
+            genreTitles,
+        };
 
-
-        // GENRES
-        const genreHTML = podcast.genres.map((genreId) => {
-
-            const matchedGenre = genres.find(
-                (genre) => genre.id === genreId
-            );
-
-            return `
-                <p>${matchedGenre.title}</p>
-            `;
-
-        }).join("");
-
-
-        // CARD CONTENT
-        card.innerHTML = `
-        
-            <div class="img_cover">
-
-                <img 
-                    src="${podcast.image}" 
-                    alt="${podcast.title}"
-                    class="podcast_cover_img"
-                >
-
-            </div>
-
-            <div class="podcast_data">
-
-                <h3>${podcast.title}</h3>
-
-                <p class="season_description">
-                    <i class="fa-solid fa-calendar fa-sm"></i>
-                    ${podcast.seasons} Seasons
-                </p>
-
-                <div class="genre_box">
-                    ${genreHTML}
-                </div>
-
-                <p class="season_update">
-                    Updated ${new Date(
-                        podcast.updated
-                    ).toLocaleDateString()}
-                </p>
-
-            </div>
-        `;
-
-
-        // OPEN MODAL
-        card.addEventListener("click", () => {
-
+        podcastCard.addEventListener("click", () => {
             openModal(podcast);
         });
 
-
-        // APPEND CARD
-        podcastContainer.appendChild(card);
-
+        podcastContainer.appendChild(podcastCard);
     });
 }
 
