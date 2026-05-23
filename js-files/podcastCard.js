@@ -1,30 +1,34 @@
 /**
  * Custom podcast card web component.
- * 
- * This component uses Shadow DOM so its HTML and CSS
- * are encapsulated and protected from global CSS conflicts.
+ *
+ * This component:
+ * - Uses Shadow DOM for style and HTML encapsulation.
+ * - Receives podcast data from the parent using the `data` property.
+ * - Dispatches a custom event when clicked.
  */
 class PodcastCard extends HTMLElement {
     constructor() {
         super();
 
         /**
-         * Stores podcast data passed from the parent file.
+         * Stores the podcast data passed from the parent.
+         *
          * @type {Object | null}
          */
         this.podcast = null;
 
         /**
-         * Creates a Shadow DOM for this component.
-         * mode: "open" allows JavaScript to access this.shadowRoot.
+         * Creates the Shadow DOM.
+         *
+         * mode: "open" means we can access it with this.shadowRoot.
          */
         this.attachShadow({ mode: "open" });
     }
 
     /**
-     * Receives podcast data from the parent.
-     * 
-     * @param {Object} podcast - Podcast data object.
+     * Receives podcast data from the parent application.
+     *
+     * @param {Object} podcast - The podcast data object.
      */
     set data(podcast) {
         this.podcast = podcast;
@@ -33,11 +37,27 @@ class PodcastCard extends HTMLElement {
 
     /**
      * Returns the current podcast data.
-     * 
+     *
      * @returns {Object | null}
      */
     get data() {
         return this.podcast;
+    }
+
+    /**
+     * Sends a custom event to the parent application.
+     *
+     * The parent can listen for "podcast-selected"
+     * and decide what should happen next.
+     */
+    handleCardClick() {
+        this.dispatchEvent(
+            new CustomEvent("podcast-selected", {
+                detail: this.podcast,
+                bubbles: true,
+                composed: true,
+            })
+        );
     }
 
     /**
@@ -52,6 +72,10 @@ class PodcastCard extends HTMLElement {
 
         this.shadowRoot.innerHTML = `
             <style>
+                :host {
+                    display: block;
+                }
+
                 .card {
                     display: flex;
                     flex-direction: column;
@@ -121,8 +145,7 @@ class PodcastCard extends HTMLElement {
                     <h3>${this.podcast.title}</h3>
 
                     <p class="season_description">
-                        <i class="fa-solid fa-calendar fa-sm"></i>
-                        ${this.podcast.seasons} Seasons
+                        📅 ${this.podcast.seasons} Seasons
                     </p>
 
                     <div class="genre_box">
@@ -135,13 +158,17 @@ class PodcastCard extends HTMLElement {
                 </div>
             </article>
         `;
+
+        this.shadowRoot
+            .querySelector(".card")
+            .addEventListener("click", () => this.handleCardClick());
     }
 }
 
 /**
  * Registers the custom element.
- * 
- * After this, we can use:
+ *
+ * This allows us to use:
  * <podcast-card></podcast-card>
  */
 customElements.define("podcast-card", PodcastCard);

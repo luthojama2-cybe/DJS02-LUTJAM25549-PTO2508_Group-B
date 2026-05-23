@@ -2,7 +2,7 @@ import { podcasts, genres } from "./js-files/data.js";
 
 import { openModal } from "./js-files/modal.js";
 
-import "./js-files/podcastCard.js"
+import "./js-files/podcastCard.js";
 
 
 // MAIN CONTAINER
@@ -28,9 +28,9 @@ function renderPodcasts() {
             genreTitles,
         };
 
-        podcastCard.addEventListener("click", () => {
-            openModal(podcast);
-        });
+        podcastCard.addEventListener("podcast-selected", (event) => {
+    openModal(event.detail);
+});
 
         podcastContainer.appendChild(podcastCard);
     });
