@@ -61,4 +61,17 @@ The component should be designed to **accept podcast data via attributes or prop
   - Instructions for passing data
   - How to listen for interaction events
 
----
+## How to use and register the component
+
+-- The component is registered in `podcastCard.js` using `customElements.define()`, then it is imported into `init.js`, where the parent app creates `<podcast-card>` elements, passes podcast data into them, and adds them to the page.
+
+## Instructions for passing data
+
+-- Data is passed from the parent file `init.js` into the component by creating a `<podcast-card>` element and assigning the podcast object to its `.data` property, which the component then uses to make the cover image, title, genres, seasons, and updated date.
+
+## How to listen for interaction events
+
+-- For interaction events, the component dispatches a custom event like `podcast-selected` when the user clicks the card, and the parent `init.js` listens for that event so it can open the modal or run any other action without the component needing to know what happens next.
+
+
+

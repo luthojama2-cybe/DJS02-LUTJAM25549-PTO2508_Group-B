@@ -1,5 +1,5 @@
 /**
- * Custom podcast card web component.
+ * Create  custom podcast card web component.
  *
  * This component:
  * - Uses Shadow DOM for style and HTML encapsulation.
