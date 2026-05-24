@@ -145,7 +145,7 @@ class PodcastCard extends HTMLElement {
                     <h3>${this.podcast.title}</h3>
 
                     <p class="season_description">
-                        📅 ${this.podcast.seasons} Seasons
+                         ${this.podcast.seasons} Seasons
                     </p>
 
                     <div class="genre_box">
